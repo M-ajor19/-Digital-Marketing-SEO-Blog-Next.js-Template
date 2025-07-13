@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles */
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded font-medium bg-primary-500 text-white hover:bg-primary-600 transition-colors;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 rounded font-medium bg-secondary-500 text-white hover:bg-secondary-600 transition-colors;
+  }
+
+  .card {
+    @apply bg-white dark:bg-zinc-800 rounded-4xl shadow-lg overflow-hidden transition-colors;
+  }
+
+  .section {
+    @apply min-h-screen flex items-center justify-center p-8;
+  }
+
+  .container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .title {
+    @apply text-4xl font-bold tracking-tight;
+  }
+
+  .subtitle {
+    @apply text-xl font-medium text-zinc-600 dark:text-zinc-400;
+  }
+}
+
+/* Dark mode transitions */
+body {
+  transition: background-color 300ms ease;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #5754ff;
+  border-radius: 4px;
+}
+
+/* Hover effects */
+.hover-glow:hover {
+  @apply shadow-glow;
+}
+
+/* Focus styles */
+:focus {
+  outline: 2px solid #5754ff;
+  outline-offset: 2px;
+}
