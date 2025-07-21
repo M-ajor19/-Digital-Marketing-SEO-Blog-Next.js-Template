@@ -1,0 +1,16 @@
+{
+  "name": "Premium Digital Marketing Blog",
+  "short_name": "Premium Marketing",
+  "description": "Professional digital marketing insights and strategies",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "32x32",
+      "type": "image/svg+xml"
+    }
+  ]
+}
