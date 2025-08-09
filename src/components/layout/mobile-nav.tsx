@@ -1,18 +1,15 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { X, ChevronDown, ArrowRight } from 'lucide-react'
+import { X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 interface NavigationItem {
   name: string
   href: string
-  icon: React.ComponentType<{ className?: string }>
-  submenu?: { name: string; href: string }[]
 }
 
 interface MobileNavProps {
@@ -22,12 +19,7 @@ interface MobileNavProps {
 }
 
 export function MobileNav({ navigation, isOpen, onClose }: MobileNavProps) {
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null)
   const pathname = usePathname()
-
-  const handleSubmenuToggle = (name: string) => {
-    setActiveSubmenu(activeSubmenu === name ? null : name)
-  }
 
   return (
     <AnimatePresence>
@@ -55,9 +47,9 @@ export function MobileNav({ navigation, isOpen, onClose }: MobileNavProps) {
               <h2 className="text-lg font-semibold">Menu</h2>
               <Button
                 variant="ghost"
-                size="icon"
+                size="sm"
                 onClick={onClose}
-                className="text-muted-foreground hover:text-foreground"
+                className="w-9 h-9 p-0 text-muted-foreground hover:text-foreground"
               >
                 <X className="h-5 w-5" />
                 <span className="sr-only">Close menu</span>
@@ -67,72 +59,27 @@ export function MobileNav({ navigation, isOpen, onClose }: MobileNavProps) {
             {/* Navigation */}
             <nav className="mt-6 space-y-2">
               {navigation.map((item) => (
-                <div key={item.name}>
-                  <div className="flex items-center">
-                    <Link
-                      href={item.href}
-                      onClick={onClose}
-                      className={cn(
-                        'flex items-center space-x-2 rounded-lg px-3 py-2 text-sm font-medium transition-colors flex-1',
-                        pathname === item.href
-                          ? 'bg-accent text-accent-foreground'
-                          : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
-                      )}
-                    >
-                      <item.icon className="h-4 w-4" />
-                      <span>{item.name}</span>
-                    </Link>
-
-                    {item.submenu && (
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleSubmenuToggle(item.name)}
-                        className="text-muted-foreground hover:text-foreground"
-                      >
-                        <ChevronDown
-                          className={cn(
-                            'h-4 w-4 transition-transform',
-                            activeSubmenu === item.name && 'rotate-180'
-                          )}
-                        />
-                      </Button>
-                    )}
-                  </div>
-
-                  {/* Submenu */}
-                  <AnimatePresence>
-                    {item.submenu && activeSubmenu === item.name && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        className="ml-6 mt-2 space-y-1 overflow-hidden"
-                      >
-                        {item.submenu.map((subItem) => (
-                          <Link
-                            key={subItem.name}
-                            href={subItem.href}
-                            onClick={onClose}
-                            className="flex items-center space-x-2 rounded-md px-3 py-2 text-sm text-muted-foreground hover:text-foreground hover:bg-accent/50 transition-colors"
-                          >
-                            <ArrowRight className="h-3 w-3" />
-                            <span>{subItem.name}</span>
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={onClose}
+                  className={cn(
+                    'flex items-center rounded-lg px-3 py-3 text-sm font-medium transition-colors',
+                    pathname === item.href
+                      ? 'bg-accent text-accent-foreground'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+                  )}
+                >
+                  {item.name}
+                </Link>
               ))}
             </nav>
 
             {/* CTA */}
             <div className="mt-8 pt-6 border-t">
-              <Button asChild className="w-full">
+              <Button asChild className="w-full h-10">
                 <Link href="/newsletter" onClick={onClose}>
-                  Subscribe to Newsletter
-                  <ArrowRight className="ml-2 h-4 w-4" />
+                  Subscribe
                 </Link>
               </Button>
             </div>

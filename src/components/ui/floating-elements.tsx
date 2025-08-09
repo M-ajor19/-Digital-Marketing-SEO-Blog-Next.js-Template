@@ -1,50 +1,29 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Zap, TrendingUp, Target, Sparkles } from 'lucide-react'
+import { Sparkles, Circle, Square } from 'lucide-react'
 
-const floatingElements = [
-  { icon: Zap, color: 'text-blue-500', size: 'h-8 w-8', delay: 0 },
-  { icon: TrendingUp, color: 'text-green-500', size: 'h-6 w-6', delay: 0.5 },
-  { icon: Target, color: 'text-purple-500', size: 'h-7 w-7', delay: 1 },
-  { icon: Sparkles, color: 'text-yellow-500', size: 'h-5 w-5', delay: 1.5 },
+const items = [
+  { key: 'a', Icon: Sparkles, left: '12%', top: '35%', size: 18, delay: 0 },
+  { key: 'b', Icon: Circle, left: '70%', top: '20%', size: 14, delay: 0.6 },
+  { key: 'c', Icon: Square, left: '80%', top: '60%', size: 22, delay: 1.2 },
 ]
 
 export function FloatingElements() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      {floatingElements.map((element, index) => {
-        const Icon = element.icon
-        return (
-          <motion.div
-            key={index}
-            className={`absolute ${element.color} ${element.size} opacity-20`}
-            initial={{ 
-              x: Math.random() * window.innerWidth, 
-              y: Math.random() * window.innerHeight,
-              rotate: 0,
-              scale: 0
-            }}
-            animate={{
-              y: [0, -30, 0],
-              rotate: [0, 180, 360],
-              scale: [0, 1, 0.8, 1],
-            }}
-            transition={{
-              duration: 6,
-              delay: element.delay,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            style={{
-              left: `${20 + index * 20}%`,
-              top: `${30 + index * 15}%`,
-            }}
-          >
-            <Icon className={element.size} />
-          </motion.div>
-        )
-      })}
+      {items.map(({ key, Icon, left, top, size, delay }) => (
+        <motion.div
+          key={key}
+          className="absolute text-foreground/10"
+          style={{ left, top }}
+          initial={{ opacity: 0, y: 0, rotate: 0 }}
+          animate={{ opacity: 1, y: [-6, 0, -6], rotate: [0, 30, 0] }}
+          transition={{ duration: 14, delay, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <Icon style={{ width: size, height: size }} />
+        </motion.div>
+      ))}
     </div>
   )
 }

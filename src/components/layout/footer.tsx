@@ -1,16 +1,17 @@
 import Link from 'next/link'
 import { 
-  Twitter, 
   Linkedin, 
-  Facebook, 
-  Instagram, 
   Mail, 
   MapPin, 
   Phone,
   ArrowRight,
   Heart,
+  Github,
+  Globe,
+  Briefcase,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { Logo } from '@/components/ui/logo'
 
 const navigation = {
   content: [
@@ -40,10 +41,12 @@ const navigation = {
 }
 
 const socialMedia = [
-  { name: 'Twitter', href: '#', icon: Twitter },
-  { name: 'LinkedIn', href: '#', icon: Linkedin },
-  { name: 'Facebook', href: '#', icon: Facebook },
-  { name: 'Instagram', href: '#', icon: Instagram },
+  { name: 'Phone', href: 'tel:+18163357598', icon: Phone },
+  { name: 'Email', href: 'mailto:majormarik@outlook.com', icon: Mail },
+  { name: 'Contra', href: 'https://contra.com/major_marik_lv7tc2bm', icon: Globe },
+  { name: 'Portfolio', href: 'https://www.notion.so/Major-s-Portfolio-Website-248117a817c3804a8b12c12ca6a64d25?source=copy_link', icon: Briefcase },
+  { name: 'GitHub', href: 'https://github.com/M-ajor19', icon: Github },
+  { name: 'LinkedIn', href: 'https://www.linkedin.com/in/majormarik', icon: Linkedin },
 ]
 
 export function Footer() {
@@ -79,10 +82,8 @@ export function Footer() {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <Link href="/" className="flex items-center space-x-2 mb-4">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 text-primary-foreground font-bold">
-                P
-              </div>
-              <span className="font-bold text-lg">Premium Marketing</span>
+              <Logo size="sm" />
+              <span className="font-bold text-lg">MU RANKSPACE</span>
             </Link>
             <p className="text-muted-foreground mb-6 max-w-md">
               Your trusted source for digital marketing excellence. We help businesses 
@@ -93,15 +94,15 @@ export function Footer() {
             <div className="space-y-2 text-sm text-muted-foreground">
               <div className="flex items-center space-x-2">
                 <Mail className="h-4 w-4" />
-                <span>hello@premiummarketing.com</span>
+                <span>majormarik@outlook.com</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Phone className="h-4 w-4" />
-                <span>+1 (555) 123-4567</span>
+                <span>+1 (816) 335-7598</span>
               </div>
               <div className="flex items-center space-x-2">
                 <MapPin className="h-4 w-4" />
-                <span>San Francisco, CA</span>
+                <span>Kansas City, MO</span>
               </div>
             </div>
           </div>
@@ -178,21 +179,24 @@ export function Footer() {
         {/* Bottom Footer */}
         <div className="py-6 border-t border-border/50 flex flex-col md:flex-row items-center justify-between">
           <div className="flex items-center space-x-1 text-sm text-muted-foreground mb-4 md:mb-0">
-            <span>© 2025 Premium Marketing. Made with</span>
+            <span>© {new Date().getFullYear()} MU RANKSPACE.</span>
+            <span>Made with</span>
             <Heart className="h-4 w-4 text-red-500 fill-current" />
-            <span>by Premium Templates</span>
+            <span>by MU RANKSPACE</span>
           </div>
 
           {/* Social Media */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center gap-4 flex-wrap">
             {socialMedia.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className="text-muted-foreground hover:text-foreground transition-colors"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors px-2 py-1 rounded-md hover:bg-accent/50"
               >
-                <span className="sr-only">{item.name}</span>
                 <item.icon className="h-5 w-5" />
+                <span className="text-sm">{item.name}</span>
               </Link>
             ))}
           </div>

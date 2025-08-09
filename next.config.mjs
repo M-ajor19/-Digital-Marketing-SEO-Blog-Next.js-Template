@@ -2,10 +2,12 @@
 const nextConfig = {
   // Enable experimental features for better performance
   experimental: {
-    optimizeCss: true,
+    optimizeCss: false,
     webVitalsAttribution: ['CLS', 'LCP'],
-    serverComponentsExternalPackages: ['gray-matter'],
   },
+
+  // Server external packages
+  serverExternalPackages: ['gray-matter'],
 
   // Image optimization
   images: {
@@ -22,9 +24,13 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'picsum.photos',
       },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
   },
 
@@ -80,8 +86,7 @@ const nextConfig = {
   distDir: '.next',
 
   // Webpack optimizations
-  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
-    // Optimize bundle size
+  webpack: (config) => {
     config.optimization.splitChunks = {
       chunks: 'all',
       cacheGroups: {
@@ -92,7 +97,6 @@ const nextConfig = {
         },
       },
     }
-
     return config
   },
 }
